@@ -2,9 +2,11 @@
 local SplitTimer = {}
 local socket = require "socket"
 
-function SplitTimer:init()
+---@param config DarkSplitsConfig
+function SplitTimer:init(config)
+    self.config = config
     local err
-    self.connection, err = socket.connect("localhost", 16834)
+    self.connection, err = socket.connect(self.config.hostname, self.config.port)
     if err == "connection refused" then
         err = "Couldn't connect to LiveSplit! Do you have the TCP server running?"
     end
@@ -28,5 +30,4 @@ function SplitTimer:split()
     return self:sendCommand "split"
 end
 
-SplitTimer:init()
 return SplitTimer

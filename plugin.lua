@@ -1,6 +1,5 @@
 local plugin = {}
 
-local config = {category = "DESS%"}
 
 function plugin:createSplitTimer()
     if SplitTimer ~= nil then
@@ -8,30 +7,40 @@ function plugin:createSplitTimer()
     end
     ---@type SplitTimer
     SplitTimer = love.filesystem.load(Kristal.Mods.data.darksplits.path.."/splittimer.lua")()
+    SplitTimer:init(Kristal.Config["plugins/darksplits"])
 end
 
 function plugin:init()
+    ---@class DarkSplitsConfig
+    ---@field category "DESS%" | "APM%"
+    ---@field hostname string
+    ---@field port number
+    Kristal.Config["plugins/darksplits"] = Kristal.Config["plugins/darksplits"] or {
+        category = "DESS%",
+        hostname = "localhost",
+        port = 16834,
+    }
     if SplitTimer == nil then
         self:createSplitTimer()
     end
 end
 
 function plugin:onDPDessTalk()
-    if config.category == "DESS%" then
+    if Kristal.Config["plugins/darksplits"].category == "DESS%" then
         SplitTimer:split()
     end
 end
 
 function plugin:onDPWarpBinUsed(code)
-    if config.category == "DESS%" and code == "DESSHERE" then
+    if Kristal.Config["plugins/darksplits"].category == "DESS%" and code == "DESSHERE" then
         SplitTimer:split()
     end
 end
 
 function plugin:onDPUnlockPartyMember(id)
-    if config.category == "APM%" then
+    if Kristal.Config["plugins/darksplits"].category == "APM%" then
         SplitTimer:split()
-    elseif config.category == "DESS%" and id == "susie" then
+    elseif Kristal.Config["plugins/darksplits"].category == "DESS%" and id == "susie" then
         SplitTimer:split()
     end
 end
