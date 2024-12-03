@@ -50,6 +50,7 @@ function plugin:postInit(new_file)
         SplitTimer:reset()
     else
         SplitTimer:unpause()
+        SplitTimer:syncGameTime()
     end
 end
 

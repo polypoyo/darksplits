@@ -36,14 +36,17 @@ function SplitTimer:syncGameTime()
 end
 
 function SplitTimer:split()
+    self:syncGameTime()
     return self:sendCommand "split"
 end
 
 function SplitTimer:pause()
+    self:syncGameTime()
     self:sendCommand "pausegametime"
 end
 
 function SplitTimer:unpause()
+    self:syncGameTime()
     self:sendCommand "unpausegametime"
 end
 
