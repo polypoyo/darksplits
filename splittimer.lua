@@ -11,7 +11,6 @@ function SplitTimer:init(config)
         err = "Couldn't connect to LiveSplit! Do you have the TCP server running?"
     end
     assert(self.connection, err)
-    self:sendCommand("switchto", "gametime")
 end
 
 function SplitTimer:deinit()
@@ -23,6 +22,8 @@ function SplitTimer:sendCommand(...)
 end
 
 function SplitTimer:startTimer()
+    -- TODO: find out how gametime works
+    --self:sendCommand("switchto", "gametime")
     return self:sendCommand "starttimer"
 end
 
