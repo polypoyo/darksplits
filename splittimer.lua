@@ -31,7 +31,8 @@ end
 
 function SplitTimer:syncGameTime()
     local s = Game.playtime
-    local time = string.format( "%.2d:%.2d:%.2f", s/(60*60), s/60%60, s%60 )
+    local seconds_padding = s > 10 and "" or "0"
+    local time = string.format( "%.2d:%.2d:%s%.7f", s/(60*60), s/60%60, seconds_padding, s%60 )
     self:sendCommand("setgametime", time)
 end
 
