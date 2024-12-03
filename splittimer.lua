@@ -14,7 +14,9 @@ function SplitTimer:init(config)
 end
 
 function SplitTimer:deinit()
-    self.connection:close()
+    if self.connection then
+        self.connection:close()
+    end
 end
 
 function SplitTimer:sendCommand(...)

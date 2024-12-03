@@ -20,7 +20,7 @@ function plugin:init()
         hostname = "localhost",
         port = 16834,
     }
-    if SplitTimer == nil then
+    if SplitTimer == nil or SplitTimer.connection == nil then
         self:createSplitTimer()
     end
 end
