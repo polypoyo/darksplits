@@ -31,4 +31,17 @@ function SplitTimer:split()
     return self:sendCommand "split"
 end
 
+function SplitTimer:pause()
+    self:sendCommand "pausegametime"
+end
+
+function SplitTimer:unpause()
+    self:sendCommand "unpausegametime"
+end
+
+function SplitTimer:reset()
+    self:sendCommand "reset"
+    self:startTimer()
+end
+
 return SplitTimer

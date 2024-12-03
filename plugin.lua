@@ -47,15 +47,14 @@ end
 
 function plugin:postInit(new_file)
     if new_file then
-        SplitTimer:sendCommand "reset"
-        SplitTimer:startTimer()
+        SplitTimer:reset()
     else
-        SplitTimer:sendCommand "unpausegametime"
+        SplitTimer:unpause()
     end
 end
 
 function plugin:unload()
-    SplitTimer:sendCommand "pausegametime"
+    SplitTimer:pause()
 end
 
 return plugin
