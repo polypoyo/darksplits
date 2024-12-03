@@ -29,6 +29,12 @@ function SplitTimer:startTimer()
     return self:sendCommand "starttimer"
 end
 
+function SplitTimer:syncGameTime()
+    local s = Game.playtime
+    local time = string.format( "%.2d:%.2d:%.2f", s/(60*60), s/60%60, s%60 )
+    self:sendCommand("setgametime", time)
+end
+
 function SplitTimer:split()
     return self:sendCommand "split"
 end
